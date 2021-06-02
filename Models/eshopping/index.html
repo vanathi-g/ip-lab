@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>E-Shopping</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="nav-container">
+        <nav>
+            <button class="sub-menu nav-btn">
+            	<a class="nav-link" href="#">Shop by Category</a>
+                <div class="sub-menu-list">
+                	<a id="mobiles" class="nav-link" onclick="showItems(event)" href="#">Mobiles</a><br>
+                    <a id="computers" class="nav-link" onclick="showItems(event)" href="#">Computers</a><br>
+                    <a id="tvs" class="nav-link" onclick="showItems(event)" href="#">TVs</a><br>
+                </div>
+            </button>
+            <button class="nav-btn" href="#">
+            	<a class="nav-link" href="#">Your Orders</a></button>
+            <button class="nav-btn" href="#">
+            	<a class="nav-link" href="#">Cart</a>
+            </button>
+        </nav>
+    </div>
+
+    <div class="body-container">
+    	<h1 class="page-title">Shopping</h1>
+    	<div id="items" class="container">
+    	</div>
+    	<div id="more-info" class="container">
+    	</div>
+    	<div id="cart-container" class="container">
+    		<h2 class="page-title">Cart</h2>
+	    	<div id="cart">
+	    		
+	    	</div>
+	    	<button onclick="moveToOrders(event)" class="nav-btn order-btn">Place Order</button>
+    	</div>
+    	<div id="orders-container" class="container">
+    		<h2 class="page-title">Your Orders</h2>
+    		<div id="your-orders">
+    		</div>
+    		<h4 id="total"></h4>
+    	</div>
+
+</body>
+<script>
+	function showItems(event){
+		const type = event.target.id;
+		const available = {
+			'mobiles': [{'name': 'Samsung M30s', 'price': 25000}, {'name': 'POCO M3', 'price': 30000}],
+			'tvs': [{'name': 'Sony Bravia', 'price': 55000}],
+			'computers': [{'name': 'Hp Pavillion', 'price': 65000}, {'name': 'Hp 15s Celeron', 'price': 70000}]
+		}
+		let content = '<h2 class="page-title">Available</h2>';
+		for(let i=0; i<available[type].length; i++){
+			content += `<div class="card" id='${available[type][i]['name']}'><h4>${available[type][i]['name']}</h4><h5>${available[type][i]['price']}</h5><button class="order-btn nav-btn" style="width: 70px" onclick="addToCart(event)">Buy</button><button class="order-btn nav-btn" style="margin-left: 20px; width: 150px" onclick="getDetails('${available[type][i]['name']}')">More Info</button></div>`
+		}
+		document.getElementById('items').innerHTML=content;
+	}
+
+	function addToCart(event){
+		const selected = event.target.parentNode.id;
+		const price = event.target.parentNode.children[1].innerHTML;
+		var cart = document.getElementById('cart');
+		var new_item = `<div id='${selected}-cart' class="card"><h4>${selected}</h4><h5>${price}</h5></div>`;
+		cart.innerHTML+=new_item;
+	}
+
+	function moveToOrders(event){
+		let total = 0;
+		let all = event.target.parentNode.children[1].children;
+		console.log(all);
+		for(let i=0; i<all.length; i++)
+		{
+			console.log(all[i]);
+			total+=parseInt(all[i].children[1].innerHTML);
+		}
+		document.getElementById('your-orders').appendChild(event.target.parentNode.children[1]);
+		document.getElementById('total').innerHTML = "TOTAL= "+total;
+	}
+
+	function getDetails(name){
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200){
+				var xmlDoc = this.responseXML;
+				var items = xmlDoc.getElementsByTagName('ITEM');
+				for(let i=0; i<items.length; i++){
+					const iname = items[i].getElementsByTagName('NAME')[0].childNodes[0].nodeValue;
+					const manufacturer = items[i].getElementsByTagName('MANUFACTURER')[0].childNodes[0].nodeValue;
+					const stock = items[i].getElementsByTagName('STOCK')[0].childNodes[0].nodeValue;
+					if(iname == name){
+						document.getElementById('more-info').innerHTML = `<div class="card"><h2>More Details</h2><h3>Manufacturer: ${manufacturer}</h3><h3>In Stock: ${stock}</h3></div>`;
+					}
+				}
+			}
+		}
+		xmlHttp.open('GET', 'details.xml', true);
+		xmlHttp.send();
+	}
+
+	
+</script>
+
+</html>

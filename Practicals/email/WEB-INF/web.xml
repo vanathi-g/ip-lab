@@ -1,0 +1,21 @@
+<web-app>
+	<servlet>
+		<servlet-name>Compose</servlet-name>
+		<servlet-class>Compose</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Compose</servlet-name>
+		<url-pattern>/compose</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Send</servlet-name>
+		<servlet-class>Send</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Send</servlet-name>
+		<url-pattern>/send</url-pattern>
+	</servlet-mapping>
+</web-app>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Compose</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>This page is for testing styles. To view compose box visit /compose</h1>
+    <div class="message-box">
+        <h1 class="message-header">New Message</h1>
+        <form method="POST" action="/email/lol">
+            <input type='email' id='receiver' name='receiver' placeholder='To' pattern='.*@.*\..*' title='Enter a valid email address!' />
+            <input type="text" id="subject" name="subject" placeholder="Subject" />
+            <textarea rows="6" name="body"></textarea>
+            <input class="btn" type="submit" value="Send" />
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <table cellspacing="0">
+    	<tr>
+    		<th>Receiver</th>
+    		<th>Subject</th>
+    		<th>Body</th>
+    	</tr>
+    	<tr>
+    		<td>vanathi@gmail.com</td>
+    		<td>Hello World</td>
+    		<td>First email being sent!</td>
+    	</tr>
+    	<tr>
+    		<td>vanathi21@gmail.com</td>
+    		<td>A New Email	</td>
+    		<td>Hello this is the body of my email</td>
+    	</tr>
+    </table>
+</body>
+
+</html>

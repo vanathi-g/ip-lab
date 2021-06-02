@@ -1,0 +1,87 @@
+* {
+	font-family: Tahoma, Arial, sans-serif;
+}
+
+body {
+	background-color: gray;
+}
+
+/*COMPOSE BOX*/
+
+.message-box{
+	width: 600px;
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	overflow: hidden;
+	border-radius: 0.25em;
+}
+
+.message-header{
+	background-color: black;
+	color: white;
+	margin: 0;
+	font-size: 20px;
+	padding: 10px;
+}
+
+input, textarea{
+	width: 100%;
+	display: block;
+	border: none;
+	padding: 10px;
+	font-size: 16px;
+}
+
+form{
+	margin: 0;
+}
+
+input {
+	
+	border-bottom: 1px solid #ddd;
+}
+
+input:focus, textarea:focus{
+	outline: none;
+}
+
+.btn{
+	margin-left: 5px;
+	margin-bottom: 5px;
+	width: 15%;
+	cursor: pointer;
+	border-radius: 0.25em;
+	background-color: #1A74E8;
+	color: white;
+	font-weight: bold;
+}
+
+/*SENT PAGE DIV*/
+
+.sent-content{
+	background-color: white;
+	padding: 3%;
+	width: 45%;
+	margin: auto;
+}
+
+.sent-content h3{
+	font-size: 24px;
+}
+
+/*SENT TABLE*/
+
+table{
+	background-color: white;
+	width: 100%;
+}
+
+td, th{
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(odd){
+	background-color: whitesmoke;
+}
